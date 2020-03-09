@@ -150,7 +150,7 @@ public class H264Encoder extends VideoEncoder {
         int luma = p == 0 ? 1 : 0;
         int pixCnt = (sps.picHeightInMapUnitsMinus1 + 1) * (sps.picWidthInMbsMinus1 + 1) << (6 + (luma * 2));
         double mse = (double) sum / pixCnt;
-        return 10 * Math.log10((10 << 16) / mse);
+        return 10 * Math.log10((255*255) / mse);
     }
 
     /**
@@ -448,7 +448,7 @@ public class H264Encoder extends VideoEncoder {
                     calcPsnr(g_sum_se[0] / frameCount, 0),
                     calcPsnr(g_sum_se[1] / frameCount, 1), 
                     calcPsnr(g_sum_se[2] / frameCount, 2),
-                    (double)(25 * (totalSize / frameCount)) / 1000));
+                    (double)(8 * 25 * (totalSize / frameCount)) / 1000));
         }
     }
 }
